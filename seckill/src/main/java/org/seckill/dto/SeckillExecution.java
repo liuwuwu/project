@@ -59,11 +59,6 @@ public class SeckillExecution {
     public void setSuccessKilled(SuccessKilled successKilled) {
         this.successKilled = successKilled;
     }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> Dao层设计
 
     @Override
     public String toString() {
@@ -74,8 +69,4 @@ public class SeckillExecution {
                 ", successKilled=" + successKilled +
                 '}';
     }
-<<<<<<< HEAD
-=======
->>>>>>> service层设计
->>>>>>> Dao层设计
 }

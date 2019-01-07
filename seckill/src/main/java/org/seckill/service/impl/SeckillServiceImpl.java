@@ -14,37 +14,19 @@ import org.seckill.service.SeckillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-=======
-<<<<<<< HEAD
-=======
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
->>>>>>> service层设计
->>>>>>> Dao层设计
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
 import java.util.List;
-<<<<<<< HEAD
 //@component @Service @repository
 @Service
-=======
-<<<<<<< HEAD
-
-=======
-//@component @Service @repository
-@Service
->>>>>>> service层设计
->>>>>>> Dao层设计
 public class SeckillServiceImpl implements SeckillService {
     private Logger logger= LoggerFactory.getLogger(this.getClass());
     //注入service依赖
-    @Autowired//@Resource,
+    @Autowired//@Resource(默认按照名称进行匹配，如设置为type则按照类型进行匹配),
     private SeckillDao seckillDao;
     @Autowired
     private SuccessKilledDao successKilledDao;
@@ -74,7 +56,7 @@ public class SeckillServiceImpl implements SeckillService {
         if(nowTime.getTime()<startTime.getTime()||nowTime.getTime()>endTime.getTime()){
             return new Exposer(false,seckillId,nowTime.getTime(),startTime.getTime(),endTime.getTime());
         }
-        //转换特定字符串的过程，不可逆
+        //转换特定字符串的过程，不可逆//todo 为何要进行加密处理
         String md5=getMD5(seckillId);
         return new Exposer(true,md5,seckillId);
     }
@@ -85,13 +67,6 @@ public class SeckillServiceImpl implements SeckillService {
         return md5;
   }
     @Override
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5) throws SecurityException, RuntimeException, SeckillCloseException {
-        if(md5 == null||md5.equals(getMD5(seckillId))){
-=======
->>>>>>> Dao层设计
     @Transactional
     /**
      * 使用注解控制事务方法的优点：
@@ -101,10 +76,6 @@ public class SeckillServiceImpl implements SeckillService {
      */
     public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5) throws SecurityException, RuntimeException, SeckillCloseException {
         if(md5 == null||!md5.equals(getMD5(seckillId))){
-<<<<<<< HEAD
-=======
->>>>>>> service层设计
->>>>>>> Dao层设计
             throw new SeckillException("seckill data rewrite");
         }
         //执行秒杀逻辑：减库存+记录购买行为

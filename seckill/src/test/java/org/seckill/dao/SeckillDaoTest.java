@@ -23,15 +23,7 @@ spring—test,junit
 public class SeckillDaoTest {
 //注入Dao实现类依赖
     @Resource
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> service层设计
->>>>>>> Dao层设计
     private SeckillDao seckillDao;
     @Test
     public void reduceNumber() throws Exception{

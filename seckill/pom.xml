@@ -84,16 +84,7 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-<<<<<<< HEAD
       <version>2.9.1</version>
-=======
-<<<<<<< HEAD
-      <version>2.9.2
-             </version>
-=======
-      <version>2.9.1</version>
->>>>>>> service层设计
->>>>>>> Dao层设计
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>

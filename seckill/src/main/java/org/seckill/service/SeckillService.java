@@ -23,7 +23,7 @@ public interface SeckillService {
     Seckill getById(long seckillId);
 
     /**
-     * 秒杀开启是否是输出秒杀接口地址，
+     * 秒杀开启是否,是输出秒杀接口地址，
      * 否则输出系统时间和秒杀时间
      * @param seckillId
      */

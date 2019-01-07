@@ -83,11 +83,6 @@ public class Exposer {
     public void setEnd(long end) {
         this.end = end;
     }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> Dao层设计
 
     @Override
     public String toString() {
@@ -100,8 +95,4 @@ public class Exposer {
                 ", end=" + end +
                 '}';
     }
-<<<<<<< HEAD
-=======
->>>>>>> service层设计
->>>>>>> Dao层设计
 }
