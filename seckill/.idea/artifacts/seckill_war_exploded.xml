@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="seckill:war exploded">
-    <output-path>D:/tomcat/webapps/seckill</output-path>
+    <output-path>$PROJECT_DIR$/target/seckill.dao</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -20,6 +20,7 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.1" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:4.0.0" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:5.1.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.1.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.1.0.RELEASE" />
@@ -32,6 +33,9 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.1.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-test:5.1.0.RELEASE" />
         </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/seckill.dao/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="seckill/web/Web" />
     </root>

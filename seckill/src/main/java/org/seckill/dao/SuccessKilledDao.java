@@ -11,13 +11,13 @@ public interface SuccessKilledDao {
      * @return
      * 插入的行数
      */
-    int insertSuccessKilled(@Param("seckillId") long seckillId, @Param("userPhone")long userPhone);
+    int insertSuccessKilled(@Param("seckillId") long seckillId, @Param("userPhone") long userPhone);
 
     /**
      * 根据Id查询successKillId并携带秒杀产品对象实体
      * @param seckillId
      * @return
      */
-    SuccessKilled queryByIdwithSeckill(@Param("seckillId")long seckillId,@Param("userPhone")long userPhone);
+    SuccessKilled queryByIdwithSeckill(@Param("seckillId") long seckillId, @Param("userPhone") long userPhone);
 
 }
