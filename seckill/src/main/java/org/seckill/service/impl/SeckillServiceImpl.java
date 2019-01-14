@@ -2,6 +2,7 @@ package org.seckill.service.impl;
 
 import org.seckill.dao.SeckillDao;
 import org.seckill.dao.SuccessKilledDao;
+import org.seckill.dao.cache.RedisDao;
 import org.seckill.dto.Exposer;
 import org.seckill.dto.SeckillExecution;
 import org.seckill.entity.Seckill;
@@ -30,6 +31,8 @@ public class SeckillServiceImpl implements SeckillService {
     private SeckillDao seckillDao;
     @Autowired
     private SuccessKilledDao successKilledDao;
+    @Autowired
+    private RedisDao redisDao;
     //md5盐值字符串，用于混淆MD5
     private final String slat="gksagheriughtekhjeolgjoergjo)(*09Y&t4ra;glrpog";
 
@@ -45,9 +48,26 @@ public class SeckillServiceImpl implements SeckillService {
 
     @Override
     public Exposer exportSeckillUrl(long seckillId) {
-        Seckill seckill=seckillDao.queryById(seckillId);
-        if(seckill==null){
-            return new Exposer(false,seckillId);
+        //优化缓存 一致性维护建立在超时的基础上
+        /*
+        * get from cache
+        * if null
+        * get db
+        * else
+        *   put cache
+        *   locgoin
+        * */
+      //访问redis
+        Seckill seckill = redisDao.getSeckill(seckillId);
+        if(seckill == null){
+            //访问数据库
+            seckill=seckillDao.queryById(seckillId);
+            if(seckill==null){
+                return new Exposer(false,seckillId);
+            }else{
+                //放入redis
+                redisDao.putSeckill(seckill);
+            }
         }
         Date startTime=seckill.getStartTime();
         Date endTime=seckill.getEndTime();
@@ -75,15 +95,12 @@ public class SeckillServiceImpl implements SeckillService {
      * 3.不是所有的方法都需要事务，如只有一条修改操作，只读操作不需要事务控制
      */
     public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5) throws SecurityException, RuntimeException, SeckillCloseException {
-        System.out.println("22222222222222222222222222222222222");
-        System.out.println("------------------------------------");
         if(md5 == null||!md5.equals(getMD5(seckillId))){
             throw new SeckillException("seckill data rewrite");
         }
         //执行秒杀逻辑：减库存+记录购买行为
         Date nowTime=new Date();
         try{
-            System.out.println("333333333333333333333333333333333");
             //减库存
             int updateCount = seckillDao.reduceNumber(seckillId,nowTime);
             if(updateCount<=0){
